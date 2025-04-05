@@ -1,0 +1,27 @@
+{
+  "name": "producer-lambda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "powershell -Command \"Remove-Item -Recurse -Force -Confirm:$false dist, create_campaign_lambda.zip\"",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "zip": "powershell -ExecutionPolicy Bypass -File ./zip-lambda.ps1",
+    "build:zip": "npm run build && npm run zip"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.148",
+    "@types/node": "^22.14.0",
+    "@types/yup": "^0.32.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1692.0",
+    "yup": "^1.6.1"
+  }
+}
