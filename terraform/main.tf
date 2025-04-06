@@ -45,3 +45,9 @@ module "consumer_lambda" {
     queue_arn = module.sqs.queue_arn
   }
 }
+
+module "apigateway" {
+  source      = "./apigateway"
+  lambda_name = module.producer_lambda.lambda_function_name
+  lambda_arn  = module.producer_lambda.lambda_arn
+}
