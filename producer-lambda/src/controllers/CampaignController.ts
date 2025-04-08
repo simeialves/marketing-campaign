@@ -1,7 +1,8 @@
 import { APIGatewayProxyEventV2, APIGatewayProxyResult } from "aws-lambda";
 import { StatusCodes } from "http-status-codes";
+import { campaignSchema } from "../schemas/campaignSchema";
 import { sendToSQS } from "../services/sqsService";
-import { campaignSchema } from "../validations/campaignValidation";
+import { Messages } from "../utils/Messages";
 
 export const CampaignController = {
   send: async (
@@ -18,14 +19,14 @@ export const CampaignController = {
 
       return {
         statusCode: StatusCodes.OK,
-        body: JSON.stringify({ message: "Campanha enviada com sucesso!" }),
+        body: JSON.stringify({ message: Messages.SUCCESS }),
       };
     } catch (err: any) {
-      console.error("Erro capturado:", err);
+      console.error(err);
       return {
         statusCode: StatusCodes.BAD_REQUEST,
         body: JSON.stringify({
-          error: err.errors || err.message || "Erro ao processar requisição.",
+          error: err.errors || err.message || Messages.REQUEST_PROCESSING_ERROR,
         }),
       };
     }
