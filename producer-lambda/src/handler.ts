@@ -2,10 +2,8 @@ import { APIGatewayProxyHandler } from "aws-lambda";
 import { SQS } from "aws-sdk";
 import * as yup from "yup";
 
-// Setup SQS
 const sqs = new SQS();
 
-// Validação com Yup
 const campaignSchema = yup.object({
   title: yup.string().required(),
   message: yup.string().required(),
@@ -18,7 +16,6 @@ export const handler: APIGatewayProxyHandler = async (event) => {
 
     console.log("Body recebido:", body);
 
-    // Validação do corpo
     await campaignSchema.validate(body, { abortEarly: false });
 
     const queueUrl = process.env.QUEUE_URL!;

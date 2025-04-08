@@ -11,7 +11,6 @@ resource "aws_lambda_function" "this" {
   }
 }
 
-# Permitir a trigger da SQS (para a consumer)
 resource "aws_lambda_event_source_mapping" "sqs_trigger" {
   count            = var.subscribe_to_sqs != null ? 1 : 0
   event_source_arn = var.subscribe_to_sqs.queue_arn
