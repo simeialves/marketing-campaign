@@ -23,24 +23,21 @@ module "iam" {
 
 module "producer_lambda" {
   source         = "./lambda"
-  lambda_name    = "create_campaign_lambda"
+  lambda_name    = "producer_campaign_lambda"
   handler        = "handler.handler"
-  zip_file       = "${path.root}/../producer-lambda/create_campaign_lambda.zip"
+  zip_file       = "${path.root}/../producer-lambda/producer_lambda.zip"
   role_arn       = module.iam.lambda_execution_role_arn
   environment = {
     QUEUE_URL = module.sqs.queue_url
   }
 }
 
-module "consumer_lambda" {
+module "process_lambda" {
   source         = "./lambda"
   lambda_name    = "process_queue_lambda"
   handler        = "handler.handler"
-  zip_file       = "${path.root}/../consumer-lambda/process_queue_lambda.zip"
+  zip_file       = "${path.root}/../process-lambda/process_lambda.zip"
   role_arn       = module.iam.lambda_execution_role_arn
-  environment = {
-    // Se precisar acessar algo aqui, coloca depois
-  }
   subscribe_to_sqs = {
     queue_arn = module.sqs.queue_arn
   }

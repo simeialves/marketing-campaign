@@ -36,9 +36,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
 const aws_sdk_1 = require("aws-sdk");
 const yup = __importStar(require("yup"));
-// Setup SQS
 const sqs = new aws_sdk_1.SQS();
-// Validação com Yup
 const campaignSchema = yup.object({
     title: yup.string().required(),
     message: yup.string().required(),
@@ -48,7 +46,6 @@ const handler = async (event) => {
     try {
         const body = JSON.parse(event.body || "{}");
         console.log("Body recebido:", body);
-        // Validação do corpo
         await campaignSchema.validate(body, { abortEarly: false });
         const queueUrl = process.env.QUEUE_URL;
         console.log("QUEUE_URL carregada:", queueUrl);
@@ -65,7 +62,7 @@ const handler = async (event) => {
         };
     }
     catch (err) {
-        console.error("Erro capturado:", err); // <-- loga o erro completo
+        console.error("Erro capturado:", err);
         return {
             statusCode: 400,
             body: JSON.stringify({

@@ -7,7 +7,7 @@
     "clean": "powershell -Command \"Remove-Item -Recurse -Force -Confirm:$false dist, process_queue_lambda.zip\"",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "zip": "powershell -ExecutionPolicy Bypass -File ./zip-lambda.ps1",
+    "zip": "powershell -ExecutionPolicy Bypass -File ./zip-process-lambda.ps1",
     "build:zip": "npm run build && npm run zip"
   },
   "keywords": [],
