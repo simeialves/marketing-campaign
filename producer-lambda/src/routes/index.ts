@@ -1,23 +1,21 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from "aws-lambda";
-import { createCampaign } from "../controller/campaignController";
+import { APIGatewayProxyHandlerV2 } from "aws-lambda";
 
-export const router = async (
-  event: APIGatewayProxyEvent
-): Promise<APIGatewayProxyResult> => {
-  const normalizedPath = event.path
-    ?.replace(/^\/(dev|prod|v1)/, "")
-    .toLowerCase();
+import { StatusCodes } from "http-status-codes";
+import { CampaignController } from "../controllers/CampaignController";
 
-  console.log("HTTP METHOD:", event.httpMethod);
-  console.log("PATH:", normalizedPath);
-  console.log("EVENT COMPLETO:", JSON.stringify(event, null, 2));
+export const mainRouter: APIGatewayProxyHandlerV2 = async (event, context) => {
+  console.log("event:", JSON.stringify(event, null, 2));
 
-  if (event.httpMethod === "POST" && normalizedPath === "/campaigns") {
-    return await createCampaign(event);
+  const method = event.requestContext.http.method;
+  const path = event.rawPath;
+
+  if (method === "POST" && path === "/campaigns") {
+    console.log("Rota /campaigns chamada com método POST |o/");
+    return await CampaignController.send(event);
   }
 
   return {
-    statusCode: 404,
-    body: JSON.stringify({ message: "Rota não encontrada." }),
+    statusCode: StatusCodes.NOT_FOUND,
+    body: JSON.stringify({ error: "Rota não encontrada" }),
   };
 };

@@ -1,9 +1,9 @@
 import { APIGatewayProxyEvent } from "aws-lambda";
-import { AnySchema } from "yup";
+import { AnyObjectSchema } from "yup";
 
 export const validate = async (
-  schema: AnySchema,
-  event: APIGatewayProxyEvent
+  event: APIGatewayProxyEvent,
+  schema: AnyObjectSchema
 ) => {
   const body = JSON.parse(event.body || "{}");
   await schema.validate(body, { abortEarly: false });
