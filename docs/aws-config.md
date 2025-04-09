@@ -33,6 +33,8 @@ Deve retornar algo como: `aws-cli/2.x.x`
 
 ### Linux
 
+1. Execute os seguintes comandos no terminal:
+
 ```
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
@@ -44,7 +46,7 @@ aws --version
 
 ### macOS
 
-Se tiver o Homebrew:
+1. Execute os seguintes comandos no terminal:
 
 ```
 brew install awscli
@@ -53,35 +55,47 @@ aws --version
 
 ---
 
-Criar usuário IAM com acesso programático
+## Criar usuário IAM
 
 1. Acesse: https://console.aws.amazon.com/iam/home
 
-2. No menu lateral, clique em Usuários > Adicionar usuário
+2. No menu lateral, clique em Usuários > Criar usuário
 
 3. Preencha:
 
-- Nome: terraform-user (ou outro nome)
+- Nome: terraform-user (ou outro nome que preferir)
 
-- Tipo de acesso: Acesso programático
+4. Clique em Próximo
 
-4. Clique em Próximo: Permissões
+5. Na tela "Definir permissões", escolha:
 
-5. Selecione: Anexar políticas existentes diretamente
+- Na seção "Opções de permissões", selecione a opção "Anexar políticas diretamente"
+- Na seção "Políticas de permissões", marque: AdministratorAccess (ou algo mais restrito se preferir)
 
-- Marque: AdministratorAccess (ou algo mais restrito se preferir)
+6. Clique em Próximo
 
-6. Clique em Próximo até Criar usuário
+7. Na tela "Revisar e criar", revise as informações e clique em "Criar usuário"
 
-7. Ao finalizar, salve as credenciais:
+8. Ao finalizar, localize o usuário criado e clique no nome dele:
 
-- Access Key ID
+- Na seção "Resumo", clique em "Criar chave de acesso"
 
-- Secret Access Key
+9. Na tela "Criar chave de acesso", na Etapa 1 "Práticas recomendadas e alternativas para chaves de acesso", selecione:
+
+- Na seção "Caso de uso" selecione a opção "Command Line Interface (CLI)"
+
+- Na opção "Confirmação" selecione "Compreendo a recomendação acima e quero prosseguir para criar uma chave de acesso."
+
+10. Clique em "Próximo"
+
+11. Na tela "Definir etiqueta de descrição - opcional", clique em "Criar chave de acesso"
+
+12. Na etapa 3, "Recuperar chaves de acesso", clique em "Baixar arquivo csv" para baixar o arquivo CSV com as credenciais. Guarde-a em um local seguro, pois você não poderá ver a chave secreta novamente.
 
 ---
 
-Configurar a AWS CLI
+## Configurar a AWS CLI
+
 No terminal/cmd/powershell, digite:
 
 ```
