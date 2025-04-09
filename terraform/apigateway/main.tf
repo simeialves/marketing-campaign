@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_api" "http_api" {
-  name          = "create-campaign-api"
+  name          = "marketing-campaign-api"
   protocol_type = "HTTP"
 }
 

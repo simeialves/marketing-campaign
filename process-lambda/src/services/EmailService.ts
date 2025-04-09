@@ -4,6 +4,25 @@ interface CampaignData {
   message: string;
 }
 
+const retry = async (
+  fn: () => Promise<void>,
+  retries: number = 3,
+  delay: number = 1000
+): Promise<void> => {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await fn();
+      return;
+    } catch (error) {
+      console.warn(`Tentativa ${i + 1} falhou.`, error);
+      if (i < retries - 1) {
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      }
+    }
+  }
+  throw new Error(`Falha após ${retries} tentativas.`);
+};
+
 export const EmailService = {
   sendCampaign: async ({
     title,
@@ -14,12 +33,14 @@ export const EmailService = {
 
     await Promise.all(
       emails.map(async (email) => {
-        try {
-          console.log(`Enviando mensagem para: ${email}`);
-          console.log(`Mensagem: ${message}`);
-        } catch (err) {
-          console.error(`Erro ao enviar para ${email}:`, err);
-        }
+        await retry(
+          async () => {
+            console.log(`Enviando mensagem para: ${email}`);
+            console.log(`Mensagem: ${message}`);
+          },
+          3,
+          1000
+        );
       })
     );
 
