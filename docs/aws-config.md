@@ -7,8 +7,7 @@ Este guia mostra como criar um usuário IAM com permissões adequadas, gerar as 
 ## O que você vai precisar
 
 - Uma conta na [AWS](https://aws.amazon.com/)
-- Permissões de administrador ou alguém da sua equipe para gerar as credenciais
-- A AWS CLI instalada no seu sistema (veja abaixo)
+- Permissões de administrador para gerar as credenciais
 
 ---
 
@@ -61,16 +60,16 @@ aws --version
 
 2. No menu lateral, clique em Usuários > Criar usuário
 
-3. Preencha:
+3. Na tela "Especificar detalhes do usuário", preencha:
 
-- Nome: terraform-user (ou outro nome que preferir)
+   - Nome: nome de usuário de sua preferência
 
 4. Clique em Próximo
 
 5. Na tela "Definir permissões", escolha:
 
-- Na seção "Opções de permissões", selecione a opção "Anexar políticas diretamente"
-- Na seção "Políticas de permissões", marque: AdministratorAccess (ou algo mais restrito se preferir)
+   - Na seção "Opções de permissões", selecione a opção "Anexar políticas diretamente"
+   - Na seção "Políticas de permissões", marque: "AdministratorAccess"
 
 6. Clique em Próximo
 
@@ -78,33 +77,32 @@ aws --version
 
 8. Ao finalizar, localize o usuário criado e clique no nome dele:
 
-- Na seção "Resumo", clique em "Criar chave de acesso"
+   - Na seção "Resumo", clique em "Criar chave de acesso"
 
-9. Na tela "Criar chave de acesso", na Etapa 1 "Práticas recomendadas e alternativas para chaves de acesso", selecione:
+9. Na tela "Práticas recomendadas e alternativas para chaves de acesso", selecione:
 
-- Na seção "Caso de uso" selecione a opção "Command Line Interface (CLI)"
-
-- Na opção "Confirmação" selecione "Compreendo a recomendação acima e quero prosseguir para criar uma chave de acesso."
+   - Na seção "Caso de uso" selecione a opção "Command Line Interface (CLI)"
+   - Na opção "Confirmação" selecione "Compreendo a recomendação acima e quero prosseguir para criar uma chave de acesso."
 
 10. Clique em "Próximo"
 
 11. Na tela "Definir etiqueta de descrição - opcional", clique em "Criar chave de acesso"
 
-12. Na etapa 3, "Recuperar chaves de acesso", clique em "Baixar arquivo csv" para baixar o arquivo CSV com as credenciais. Guarde-a em um local seguro, pois você não poderá ver a chave secreta novamente.
+12. Na tela "Recuperar chaves de acesso", clique em "Baixar arquivo csv" para baixar o arquivo CSV com as credenciais. Guarde-a em um local seguro, pois você não poderá ver a chave secreta novamente.
 
 ---
 
 ## Configurar a AWS CLI
 
-No terminal/cmd/powershell, digite:
+No terminal, digite:
 
-```
+```bash
 aws configure
 ```
 
-Preencha com os dados:
+Preencha com os dados que foram obtidos no arquivo _csv_ no passo anterior:
 
-```
+```bash
 AWS Access Key ID [None]: SUA_ACCESS_KEY
 AWS Secret Access Key [None]: SUA_SECRET_KEY
 Default region name [None]: us-east-2
@@ -115,11 +113,23 @@ Região: escolha a mesma usada no seu projeto Terraform (ex: us-east-2)
 
 ---
 
-Testar configuração
+Para testar se a configuração foi feita corretamente, execute o seguinte comando:
 
-```
+```bash
 aws sts get-caller-identity
 ```
+
+Caso a configuração tenha sido realizada corretamente, você verá algo como:
+
+```json
+{
+  "UserId": "xxxxxxxxxxxxxx",
+  "Account": "xxxxxxxxxxxxxx",
+  "Arn": "arn:aws:iam::xxxxxxxxxxxxxx:user/username"
+}
+```
+
+Caso apareça a mensagem `An error occurred (AccessDenied) when calling the GetCallerIdentity operation: User: arn:aws:iam::xxxxxxxxxxxxxx:user/username is not authorized to perform: sts:GetCallerIdentity on resource: *`, significa que o usuário não tem permissão para executar o comando. Dessa forma, você deverá verificar as permissões do usuário criado anteriormente.
 
 ---
 

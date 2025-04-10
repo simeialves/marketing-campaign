@@ -8,7 +8,6 @@ export const mainRouter: APIGatewayProxyHandlerV2 = async (event, context) => {
   const path = event.rawPath;
 
   if (method === "POST" && path === "/campaigns") {
-    console.log("Rota /campaigns chamada com método POST");
     return await CampaignController.send(event);
   }
 

@@ -6,10 +6,8 @@ Este guia mostra como instalar e configurar o **Terraform** no seu sistema opera
 
 ## Pré-requisitos
 
-- Conta na [AWS](https://aws.amazon.com/)
 - Acesso de administrador ou políticas necessárias para criar recursos
-- Terminal/Prompt de comando funcional
-- (Recomendado) Instalar a [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+- Acesso à internet para baixar o Terraform
 
 ---
 
@@ -28,7 +26,7 @@ https://developer.hashicorp.com/terraform/downloads
 
 - Mova o `terraform.exe` para uma pasta de fácil acesso, como:
 
-```
+```text
 C:\terraform
 ```
 
@@ -37,7 +35,7 @@ C:\terraform
 - Na seção **Variáveis do sistema**, edite a variável `Path`
 - Clique em **"Novo"** e adicione:
 
-```
+```text
 C:\terraform
 ```
 
@@ -51,7 +49,7 @@ terraform -v
 
 Você deverá ver algo como:
 
-```
+```bash
 Terraform v1.6.2
 ```
 
@@ -73,7 +71,7 @@ sudo apt install terraform
 
 ### 2. Verificar instalação
 
-```
+```bash
 terraform -v
 ```
 
@@ -81,22 +79,22 @@ terraform -v
 
 ### 1. Usando Homebrew
 
-```
+```bash
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 ```
 
 ### 2. Verificar instalação
 
-```
+```bash
 terraform -v
 ```
 
-## Testar Terraform
+## Testar o Terraform
 
 Para garantir que está tudo certo:
 
-```
+```bash
 terraform version
 terraform -help
 ```
@@ -107,25 +105,25 @@ terraform -help
 
 Se quiser inicializar o Terraform:
 
-```
+```bash
 terraform init
 ```
 
 Para validar a configuração do Terraform:
 
-```
+```bash
 terraform plan
 ```
 
 Depois, para aplicar as alterações e criar os recursos:
 
-```
+```bash
 terraform apply
 ```
 
 Caso quer desfazer as alterações e remover os recursos criados:
 
-```
+```bash
 terraform destroy
 ```
 
