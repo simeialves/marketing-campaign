@@ -32,8 +32,8 @@ C:\terraform
 
 - Abra o menu iniciar e pesquise: `Variáveis de Ambiente`
 - Clique em **"Variáveis de ambiente"**
-- Na seção **Variáveis do sistema**, edite a variável `Path`
-- Clique em **"Novo"** e adicione:
+- Na seção "**Variáveis de usuário para <NOME_DO_SEU_USUARIO>**", selecione a variável `Path` e clique em `Editar...`
+- Ao abrir a tela `Editar a variável de ambiente`, clique em **"Novo"** e adicione uma nova variável com o local aonde foi adicionado o `terraform.exe`, conforme abaixo:
 
 ```text
 C:\terraform
