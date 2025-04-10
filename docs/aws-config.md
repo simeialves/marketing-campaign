@@ -26,7 +26,9 @@ Escolha seu sistema operacional:
 aws --version
 ```
 
-Deve retornar algo como: `aws-cli/2.x.x`
+Deve retornar algo como: `aws-cli/2.x.x`.
+
+Obs.: Caso não tenha o `aws` disponível, reinicie o computador.
 
 ---
 
