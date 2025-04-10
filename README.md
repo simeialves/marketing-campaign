@@ -219,13 +219,15 @@ https://xxxxx.execute-api.us-east-2.amazonaws.com/campaigns
 
 ## Monitoramento com CloudWatch
 
-1. Acesse AWS CloudWatch
+1. Acesse a mesma região que você configurou o `AWS CLI`, que no nosso exemplo é `us-east-2`.
 
-2. Vá em Logs > Grupos de Logs
+2. Acesse AWS CloudWatch
 
-3. Busque pelo nome da sua função Lambda `process_queue_lambda` ou `producer_campaign_lambda`.
+3. Vá em Logs > Grupos de Logs
 
-4. Você poderá ver logs como:
+4. Busque pelo nome da sua função Lambda `process_queue_lambda` ou `producer_campaign_lambda`.
+
+5. Você poderá ver logs como:
 
 - Na função `producer_campaign_lambda` você verá:
 
