@@ -103,7 +103,7 @@ terraform -help
 
 ## Dicas para Usar o Terraform
 
-Se quiser inicializar o Terraform:
+Para inicializar o Terraform:
 
 ```bash
 terraform init
@@ -115,7 +115,7 @@ Para validar a configuração do Terraform:
 terraform plan
 ```
 
-Depois, para aplicar as alterações e criar os recursos:
+Para aplicar as alterações e criar os recursos:
 
 ```bash
 terraform apply
